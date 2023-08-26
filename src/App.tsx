@@ -7,7 +7,6 @@ import OwnerDashboard from './page/Owner/OwnerDashboard'
 import DriverDashboard from './page/Driver/DriverDashboard'
 import EmergencyModal from './components/Modal/EmergencyModal'
 import SignUpOwner from './page/Register/SignUpOwner'
-import { authcontext } from './context/Auth'
 import AddAmbulance from './page/Add Ambulance/AddAmbulance'
 
 
@@ -15,6 +14,7 @@ import AddAmbulance from './page/Add Ambulance/AddAmbulance'
 function App() {
   // const [isLogin, setisLogin] = useContext(authcontext)
   const [showModal, setshowModal] = useState(true)
+  console.log(showModal)
   return (
     <>
       <BrowserRouter>

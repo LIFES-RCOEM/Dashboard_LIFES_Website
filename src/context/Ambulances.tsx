@@ -1,6 +1,30 @@
-import { createContext, useState } from "react"
+import { createContext, useState, Dispatch, SetStateAction } from "react"
 
-export const ambulanceContext = createContext(undefined)
+type Ambulance = {
+    id: number,
+    name: string,
+    location: string,
+    status: string,
+    driver: string,  
+}
+
+interface ContextInterface {
+    allAmbulances: Ambulance[],
+    setallAmbulances: Dispatch<SetStateAction<Ambulance[]>>
+}
+
+const defaultState = {
+    allAmbulances: [{
+        id: 1,
+        name: "string",
+        location: "string",
+        status: "string",
+        driver: "string",
+    }],
+    setallAmbulances: (allAmbulances : Ambulance[]) => {}
+} as ContextInterface
+
+export const ambulanceContext = createContext(defaultState)
 
 interface PROPS {
     children: React.ReactNode
@@ -8,7 +32,13 @@ interface PROPS {
 
 const AmbulanceState = (props: PROPS) => {
 
-    const [allAmbulances, setallAmbulances] = useState([])
+    const [allAmbulances, setallAmbulances] = useState<Ambulance[]>([{
+            id: 1,
+            name: "string",
+            location: "string",
+            status: "string",
+            driver: "string",  
+    }])
 
     // TODO: API TO GeT ALL AMBULANCES
     // TODO: API TO ADD AMBULANCE
@@ -20,9 +50,7 @@ const AmbulanceState = (props: PROPS) => {
 
 
     return(
-        <ambulanceContext.Provider value={{
-            allAmbulances, setallAmbulances
-        }}>
+        <ambulanceContext.Provider value={{ allAmbulances, setallAmbulances }}>
             {props.children}
         </ambulanceContext.Provider>
     )
