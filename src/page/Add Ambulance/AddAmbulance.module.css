@@ -1,0 +1,15 @@
+.container .form-group {
+    /* font-size : 1.5rem; */
+    /* border-bottom: 1px solid gray; */
+
+}
+
+.container .form-group h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: gray;
+}
+
+.container .form-group label{ 
+    display: block;
+}
