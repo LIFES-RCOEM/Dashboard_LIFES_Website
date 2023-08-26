@@ -58,9 +58,18 @@ const OwnerDashboard = () => {
 
   return (
     <div className="w-full md:w-[50%] m-auto py-5">
-      <h1 className="text-2xl font-semibold">
-        Welcome to your Dashboard
-      </h1>
+      <div className="flex justify-between items-center my-5">
+        <h1 className="text-2xl font-semibold">
+          Welcome to your Dashboard
+        </h1>
+          <div className="flex items-center">
+            <NavLink to="/" className="" >
+              <button className="bg-black text-white p-2 text-md lg:text-xl font-semibold">
+                Log Out
+              </button>
+            </NavLink>
+        </div>
+      </div>
       <ul className="list">
         {allAmbulances.map((ambulance) => (
           <Ambulance key={ambulance.id} ambulance={ambulance} />
@@ -73,6 +82,7 @@ const OwnerDashboard = () => {
           </button>
         </NavLink>
       </div>
+
     </div>
   )
 }
