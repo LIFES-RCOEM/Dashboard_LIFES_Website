@@ -1,14 +1,48 @@
-
-import { NavLink } from 'react-router-dom';
+import { useContext, useEffect } from 'react' 
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styles from "./EmergencyModal.module.css";
+import { authcontext } from '../../context/Auth';
 
-interface PROPS {
-  setshowModal: (showModal: boolean) => void
-}
+// interface PROPS {
+//   // setshowModal: (showModal: boolean) => void
+//   // id: number
+// }
 
-const EmergencyModal = (props: PROPS) => {
-  const { setshowModal } = props
+const EmergencyModal = () => {
+  const location = useLocation()
+  // const { setshowModal } = props
+  // const [showModal, setshowModal] = useState(false)
+  const navigate = useNavigate()
+  const { user, setdriver, setowner, notify }  = useContext(authcontext)
 
+  const checkIfFirst = async () => {
+        try {
+            const data = await fetch(`${import.meta.env.VITE_BACKEND_URL}/firstArrived/${localStorage.getItem('id')}/`)
+            const response = await data.json()
+            console.log(response)
+            if( response.status == "200"){
+                setdriver(response.message)
+                navigate('/dashboard/driver', {state : { data : response.message } })
+            } else if (response.status == "201") {
+                setowner(response.message)
+                navigate('/dashboard/owner', {state : { data : response.message } })
+            } 
+        } catch (error) {
+            notify(0, 'Internal Error, Login Again')
+            localStorage.removeItem("islogin")
+            localStorage.removeItem("id")
+            navigate('/login')
+        }
+    }
+
+  useEffect( () => {
+    if(localStorage.getItem("islogin") == "true"){
+      checkIfFirst()
+    } else {
+      navigate("/login")
+    }
+  }, [])
+  
 
   return (
     <div className={`${styles["modal-container"]} `} id="myModal" >
@@ -19,8 +53,8 @@ const EmergencyModal = (props: PROPS) => {
            <button className="button-orange p-5 rounded-full text-md font-semibold">
               <NavLink
                 to="/register/owner"
+                state={{ user : user, type: 'ambulances' }}
                 className="text-wrapper"
-                onClick={() => setshowModal(false)}
                 >
                 Fleet Owner Register
               </NavLink>
@@ -29,8 +63,8 @@ const EmergencyModal = (props: PROPS) => {
            <button className="button-orange p-5 rounded-full text-md font-semibold">
               <NavLink
                 to="/register/driver"
+                state={{ user : user , type: 'drivers' }}
                 className="text-wrapper"
-                onClick={() => setshowModal(false)}
                 >
                 Driver Register
               </NavLink>

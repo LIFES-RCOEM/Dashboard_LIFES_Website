@@ -4,6 +4,9 @@ import App from './App.tsx'
 import './styles/globals.css'
 import AuthState from './context/Auth.tsx'
 import AmbulanceState from './context/Ambulances.tsx'
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

@@ -1,13 +1,30 @@
-import { NavLink } from "react-router-dom"
+import { useState, useEffect, useContext } from 'react'
+import { NavLink, useLocation, useNavigate } from "react-router-dom"
+import { authcontext } from '../../context/Auth'
+import { ambulanceContext } from '../../context/Ambulances'
 
 
 const DriverDashboard = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const { checkIfFirst, user } = useContext(authcontext)
+  const { driverInfo, getDriverInfo} = useContext(ambulanceContext)
 
 
   const logOut = () => {
     // localStorage.removeItem('isLogin')
     console.log("logout")
+    localStorage.removeItem("islogin")
+    localStorage.removeItem("id")
+    navigate("/login")
   }
+
+  useEffect( () => {
+    if(!localStorage.getItem("islogin")){
+      navigate("/login")
+    }
+
+  }, [])
   
   return (
     <div className="w-full md:w-[60%] m-auto py-5">
@@ -23,8 +40,14 @@ const DriverDashboard = () => {
             </NavLink>
         </div>
       </div>
-      <div className="dashboard">
-        Status: Active 
+      <div className="">
+        <b>Status</b>: {driverInfo.busy ? "Busy" : "Free"} 
+      </div>
+      <div className="">
+        <b>Name</b>: {user.first_name + " " + user.last_name} 
+      </div>
+      <div className="">
+        <b>Username</b>: {user.username} 
       </div>
     </div>
   )
