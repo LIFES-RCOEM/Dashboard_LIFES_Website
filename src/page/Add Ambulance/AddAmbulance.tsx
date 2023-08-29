@@ -14,7 +14,7 @@ const AddAmbulance = () => {
     fleatId : owner.id,
     regNumber: "",
     carModel: "",
-    type: "",
+    type: "Advance",
     evoc: "",
     liscance: "",
     aadhar: "",
@@ -42,6 +42,7 @@ const AddAmbulance = () => {
     //     aadhar : aadhar.files[0].name
     //   })
     // } else {
+      // console.log(ambulance)
     setambulance({
         ...ambulance,
         [e?.target?.name]: e?.target?.value,
@@ -51,8 +52,8 @@ const AddAmbulance = () => {
 
   const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    createAmbulance(ambulance, location.state.type)
-    if(location.state.type == "ambulances"){
+    createAmbulance(ambulance, location.state?.type || "")
+    if(location.state?.type == "ambulances"){
       navigate('/dashboard/owner')
     } else {
       navigate('/dashboard/driver')
@@ -89,11 +90,11 @@ const AddAmbulance = () => {
               <input onChange={handleChange} type="radio" name="type" value={"Advance"} />
               Advance Life Support
             </label>
-            <label htmlFor="">
+            <label htmlFor="type">
               <input onChange={handleChange} type="radio" name="type" value={"Basic"} />
               Basic Life Support
             </label>
-            <label htmlFor="">
+            <label htmlFor="type">
               <input onChange={handleChange} type="radio" name="type" value={"Mortuary"} />
               Mortuary
             </label>

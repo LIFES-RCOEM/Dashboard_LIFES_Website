@@ -1,3 +1,5 @@
+import { useContext } from "react"
+import { authcontext } from "../../context/Auth"
 
 interface PROPS {
   ambulance : {
@@ -13,10 +15,10 @@ interface PROPS {
 }
 const Ambulance = (props:PROPS) => {
   const { ambulance } = props
-
+  const { owner } = useContext(authcontext)
   return (
     <div className="shadow-2xl bg-[#fafafa] rounded-lg p-4 mb-4">
-            <h3 className="text-xl font-semibold text-center">Fleet: {ambulance.name}</h3>
+            <h3 className="text-xl font-semibold text-center">{"Fleet: " + owner.companyName}</h3>
             <div className="flex gap-3 flex-col">
                 <p>
                   <b>

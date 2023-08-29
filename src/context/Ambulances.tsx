@@ -116,7 +116,7 @@ const AmbulanceState = (props: PROPS) => {
             body: JSON.stringify(data)
         })
         const res = await response.json()
-        console.log(res)
+        console.log("added ambulnace", res)
         return res
         } catch (error) {
             console.log(error)
@@ -126,7 +126,7 @@ const AmbulanceState = (props: PROPS) => {
     // TODO : Get all ambulance of a fleet owner
     const getAllAmbulances = async () => {
         const response = await checkIfFirst()
-        console.log(response)
+        // console.log(response)
         fetch(`${import.meta.env.VITE_BACKEND_URL}/ambulanceid/${response.data.id}`)
         .then(data => data.json())
         .then(response => {

@@ -55,14 +55,14 @@ const logout =  () => {
 
 
   return (
-    <div className="w-full md:w-[50%] m-auto py-5">
-      <div className="flex justify-between items-center my-5">
+    <div className="w-full md:w-[50%] m-auto p-5">
+      <div className="flex justify-between items-center my-5 ">
         <h1 className="text-2xl font-semibold">
           Welcome to your Dashboard
         </h1>
           <div className="flex items-center">
             <NavLink to="/login" className="" onClick={logout}>
-              <button className="bg-black text-white p-2 text-md lg:text-xl font-semibold">
+              <button className="bg-black text-white p-2 text-md lg:text-xl font-semibold rounded-full">
                 Log Out
               </button>
             </NavLink>
@@ -78,7 +78,7 @@ const logout =  () => {
         </>
       }
       <div className="flex justify-center items-center">
-        <NavLink to="/add_ambulance" className="m-auto" >
+        <NavLink to="/add_ambulance" state={{ type: "ambulances" }} className="m-auto" >
           <button className="bg-orange-500 p-5 rounded-full text-md lg:text-xl font-semibold">
             Add Ambulance
           </button>
