@@ -70,7 +70,7 @@ const AddAmbulance = () => {
 
   return (
     <div className="h-screen w-screen p-6 grid place-content-center gap-5"  >
-      <h1 className='text-3xl font-bold'>Fleet Name: XYZ</h1>
+      <h1 className='text-3xl font-bold'>{location.state?.type && "Fleet Name: "+ owner.companyName}</h1>
       <form onSubmit={handleSubmit} className={`${styles['container']} flex flex-col justify-between m-auto shadow-xl p-5 min-h-[350px] gap-10 min-w-[350px]`} >
         <div className={`${styles["form-group"]}`}>
           <h3>Vehicle Number</h3>
